@@ -8,12 +8,14 @@ public class TestDeConnection {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tennis?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Paris&allowPublicKeyRetrieval=true","COURSDB","coursdb");
 
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT NOM, PRENOM, ID FROM JOUEUR");
+            PreparedStatement statement = conn.prepareStatement("SELECT NOM, PRENOM, ID FROM JOUEUR WHERE ID=?");
+            long identifiant = 12L;
+            statement.setLong(1, identifiant);
+            ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                String nom = rs.getString("NOM");
-                String prenom = rs.getString("PRENOM");
+                final String nom = rs.getString("NOM");
+                final String prenom = rs.getString("PRENOM");
                 final long id = rs.getInt("ID");
                 System.out.printf("Le/la joueur/joueuse %s %s est représenté(e) par l'id %d%n.", prenom, nom, id);
             }
