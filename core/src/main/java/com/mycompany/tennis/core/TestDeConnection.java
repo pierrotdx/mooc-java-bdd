@@ -1,6 +1,6 @@
 package com.mycompany.tennis.core;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.sql.*;
 
@@ -8,14 +8,12 @@ public class TestDeConnection {
     public static void main(String... args){
         Connection conn = null;
         try {
-            MysqlDataSource dataSource = new MysqlDataSource();
-            dataSource.setServerName("localhost");
-            dataSource.setPort(3306);
-            dataSource.setDatabaseName("tennis");
-            dataSource.setUseSSL(false);
-            dataSource.setAllowPublicKeyRetrieval(true);
-            dataSource.setUser("COURSDB");
+            BasicDataSource dataSource = new BasicDataSource();
+            dataSource.setUrl("jdbc:mysql://localhost:3306/tennis?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Paris&allowPublicKeyRetrieval=true");
+            dataSource.setUsername("COURSDB");
             dataSource.setPassword("coursdb");
+            int nbPools = 5;
+            dataSource.setInitialSize(nbPools);
             conn = dataSource.getConnection();
             conn.setAutoCommit(false);
 
