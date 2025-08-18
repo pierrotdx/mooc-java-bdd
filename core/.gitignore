@@ -2,7 +2,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-**/workspace.xml
+.idea/workspace.xml
 
 ### Eclipse ###
 .apt_generated
