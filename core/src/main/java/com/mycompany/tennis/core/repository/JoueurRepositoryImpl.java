@@ -2,14 +2,13 @@ package com.mycompany.tennis.core.repository;
 
 import com.mycompany.tennis.core.entity.Joueur;
 import static com.mycompany.tennis.core.DataSourceProvider.getSingleDataSourceInstance;
-import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JoueurRepository {
+public class JoueurRepositoryImpl {
 
     public Long create(Joueur joueur) {
         Connection conn = null;

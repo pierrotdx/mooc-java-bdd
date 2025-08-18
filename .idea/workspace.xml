@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a55ad0c4-d9fe-4db8-8bbe-3ec566ab303f" name="Changes" comment="15. Le pool de connexion">
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/TestDeConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/TestDeConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/repository/JoueurRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/repository/JoueurRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/repository/JoueurRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/repository/JoueurRepositoryImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
