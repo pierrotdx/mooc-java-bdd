@@ -16,7 +16,7 @@ public class TestDeConnection {
             String sexe = "F";
             statement.setString(1, nom);
             statement.setString(2, prenom);
-            statement.setNull(3, Types.CHAR); // erreur volontaire pour tester le rollback
+            statement.setString(3, sexe);
 
             statement.executeUpdate();
 
