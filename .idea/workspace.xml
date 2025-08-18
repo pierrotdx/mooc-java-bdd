@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a55ad0c4-d9fe-4db8-8bbe-3ec566ab303f" name="Changes" comment="Merge branch 'exercice1' into cours/section5" />
+    <list default="true" id="a55ad0c4-d9fe-4db8-8bbe-3ec566ab303f" name="Changes" comment="config">
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/entity/Epreuve.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/entity/Match.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/entity/Score.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/repository/MatchRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/repository/ScoreRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/service/MatchService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/TestDeConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/Cours.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,6 +47,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.Cours.executor": "Run",
     "Application.TestDeConnection.executor": "Run",
     "Maven.core [clean].executor": "Run",
     "Maven.core [compile].executor": "Run",
@@ -47,7 +57,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "21UnServiceMetierPlusComplexe",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/pierr/Documents/Projets/mooc-java-bdd",
@@ -58,8 +68,8 @@
   }
 }]]></component>
   <component name="RunManager">
-    <configuration name="TestDeConnection" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.mycompany.tennis.core.TestDeConnection" />
+    <configuration name="Cours" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mycompany.tennis.core.Cours" />
       <module name="core" />
       <extension name="coverage">
         <pattern>
@@ -73,7 +83,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TestDeConnection" />
+        <item itemvalue="Application.Cours" />
       </list>
     </recent_temporary>
   </component>
@@ -101,12 +111,21 @@
       <option name="project" value="LOCAL" />
       <updated>1755545349162</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="config">
+      <option name="closed" value="true" />
+      <created>1755546612626</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1755546612626</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="15. Le pool de connexion" />
     <MESSAGE value="Merge branch 'exercice1' into cours/section5" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'exercice1' into cours/section5" />
+    <MESSAGE value="config" />
+    <option name="LAST_COMMIT_MESSAGE" value="config" />
   </component>
 </project>
