@@ -8,21 +8,37 @@ public class TestDeConnection {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tennis?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Paris&allowPublicKeyRetrieval=true","COURSDB","coursdb");
 
-            PreparedStatement statement = conn.prepareStatement("SELECT NOM, PRENOM, ID FROM JOUEUR WHERE ID=?");
-            long identifiant = 12L;
-            statement.setLong(1, identifiant);
-            ResultSet rs = statement.executeQuery();
+            conn.setAutoCommit(false);
 
-            while (rs.next()) {
-                final String nom = rs.getString("NOM");
-                final String prenom = rs.getString("PRENOM");
-                final long id = rs.getInt("ID");
-                System.out.printf("Le/la joueur/joueuse %s %s est représenté(e) par l'id %d%n.", prenom, nom, id);
-            }
+            PreparedStatement statement = conn.prepareStatement("INSERT INTO JOUEUR (NOM, PRENOM, SEXE) VALUES (?, ?, ?)");
+            String nom = "Capriati";
+            String prenom = "Jennifer";
+            String sexe = "F";
+            statement.setString(1, nom);
+            statement.setString(2, prenom);
+            statement.setNull(3, Types.CHAR); // erreur volontaire pour tester le rollback
 
+            statement.executeUpdate();
+
+            nom = "Johannson";
+            prenom = "Thomas";
+            sexe = "H";
+            statement.setString(1, nom);
+            statement.setString(2, prenom);
+            statement.setString(3, sexe);
+
+            statement.executeUpdate();
+            conn.commit();
             System.out.println("success");
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
         }
         finally {
             try {
