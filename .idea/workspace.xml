@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a55ad0c4-d9fe-4db8-8bbe-3ec566ab303f" name="Changes" comment="15. Le pool de connexion">
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/DataSourceProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/TestDeConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/TestDeConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/repository/JoueurRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/repository/JoueurRepository.java" afterDir="false" />
     </list>

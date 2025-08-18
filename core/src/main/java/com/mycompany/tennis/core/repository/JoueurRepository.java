@@ -5,28 +5,32 @@ import static com.mycompany.tennis.core.DataSourceProvider.getSingleDataSourceIn
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JoueurRepository {
 
-    public void create(Joueur joueur) {
+    public Long create(Joueur joueur) {
         Connection conn = null;
         try {
             DataSource dataSource = getSingleDataSourceInstance();
 
             conn = dataSource.getConnection();
 
-            PreparedStatement statement = conn.prepareStatement("INSERT INTO JOUEUR (NOM, PRENOM, SEXE) VALUES (?, ?, ?)");
+            PreparedStatement statement = conn.prepareStatement("INSERT INTO JOUEUR (NOM, PRENOM, SEXE) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, joueur.getNom());
             statement.setString(2, joueur.getPrenom());
             statement.setString(3, joueur.getSexe().toString());
 
             statement.executeUpdate();
+
+            ResultSet rs = statement.getGeneratedKeys();
+
+            if (rs.next()) {
+                joueur.setId(rs.getLong(1));
+            }
+
             System.out.println("Joueur créé.");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,6 +51,7 @@ public class JoueurRepository {
                 e.printStackTrace();
             }
         }
+        return joueur.getId();
     }
 
     public void update(Joueur joueur) {
