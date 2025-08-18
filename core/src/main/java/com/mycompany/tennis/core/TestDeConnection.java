@@ -1,13 +1,22 @@
 package com.mycompany.tennis.core;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
+
 import java.sql.*;
 
 public class TestDeConnection {
     public static void main(String... args){
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tennis?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Paris&allowPublicKeyRetrieval=true","COURSDB","coursdb");
-
+            MysqlDataSource dataSource = new MysqlDataSource();
+            dataSource.setServerName("localhost");
+            dataSource.setPort(3306);
+            dataSource.setDatabaseName("tennis");
+            dataSource.setUseSSL(false);
+            dataSource.setAllowPublicKeyRetrieval(true);
+            dataSource.setUser("COURSDB");
+            dataSource.setPassword("coursdb");
+            conn = dataSource.getConnection();
             conn.setAutoCommit(false);
 
             PreparedStatement statement = conn.prepareStatement("INSERT INTO JOUEUR (NOM, PRENOM, SEXE) VALUES (?, ?, ?)");
