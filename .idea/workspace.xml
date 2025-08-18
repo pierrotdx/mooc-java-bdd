@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a55ad0c4-d9fe-4db8-8bbe-3ec566ab303f" name="Changes" comment="15. Le pool de connexion">
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/entity/Tournoi.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/repository/TournoiRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/TestDeConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/TestDeConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/repository/JoueurRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/mycompany/tennis/core/repository/JoueurRepositoryImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +52,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "cours/section4",
+    "git-widget-placeholder": "exercice1",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/pierr/Documents/Projets/mooc-java-bdd",

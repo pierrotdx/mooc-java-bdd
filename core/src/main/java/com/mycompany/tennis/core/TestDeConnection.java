@@ -1,36 +1,32 @@
 package com.mycompany.tennis.core;
 
-import com.mycompany.tennis.core.entity.Joueur;
-import com.mycompany.tennis.core.repository.JoueurRepositoryImpl;
+import com.mycompany.tennis.core.entity.Tournoi;
+import com.mycompany.tennis.core.repository.TournoiRepositoryImpl;
 
 import java.util.List;
 
 public class TestDeConnection {
     public static void main(String... args){
-        JoueurRepositoryImpl joueurRepository = new JoueurRepositoryImpl();
+        TournoiRepositoryImpl tournoiRepository = new TournoiRepositoryImpl();
 
-        List<Joueur> joueurs = joueurRepository.list();
-        for (Joueur joueur : joueurs) {
-            System.out.println(joueur.getPrenom() + " " + joueur.getNom());
+        List<Tournoi> tournois = tournoiRepository.list();
+        for (Tournoi tournoi : tournois) {
+            System.out.println(tournoi.getNom() + " (" + tournoi.getCode() + ")");
         }
 
-        Joueur bartoli =  joueurRepository.getById(21l);
-        System.out.println(bartoli.getPrenom() + " " + bartoli.getNom());
+        Tournoi rollandGarros =  tournoiRepository.getById(2L);
+        System.out.println(rollandGarros.getNom() + " a le code " + rollandGarros.getCode());
 
-        Joueur noah = new Joueur();
-        noah.setPrenom("Yannik"); // faute délibérée pour ensuite update
-        noah.setNom("Noah");
-        noah.setSexe('H');
-        long id = joueurRepository.create(noah);
-        noah.setId(id);
+        Tournoi grenoble = new Tournoi();
+        grenoble.setNom("Open de Grenoble");
+        grenoble.setCode("OG");
+        long id = tournoiRepository.create(grenoble);
+        grenoble.setId(id);
 
-        noah = joueurRepository.getById(noah.getId());
-        noah.setPrenom("Yannick");
-        joueurRepository.update(noah);
+        grenoble = tournoiRepository.getById(grenoble.getId());
+        grenoble.setNom("FR Open de Grenoble");
+        tournoiRepository.update(grenoble);
 
-        joueurRepository.delete(noah.getId());
-
-
-
+        tournoiRepository.delete(grenoble.getId());
     }
 }
