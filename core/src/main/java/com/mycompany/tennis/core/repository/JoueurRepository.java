@@ -1,8 +1,10 @@
 package com.mycompany.tennis.core.repository;
 
 import com.mycompany.tennis.core.entity.Joueur;
+import static com.mycompany.tennis.core.DataSourceProvider.getSingleDataSourceInstance;
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,18 +17,14 @@ public class JoueurRepository {
     public void create(Joueur joueur) {
         Connection conn = null;
         try {
-            BasicDataSource dataSource = new BasicDataSource();
-            int nbPools = 5;
-            dataSource.setInitialSize(nbPools);
-            dataSource.setUrl("jdbc:mysql://localhost:3306/tennis?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Paris&allowPublicKeyRetrieval=true");
-            dataSource.setUsername("COURSDB");
-            dataSource.setPassword("coursdb");
+            DataSource dataSource = getSingleDataSourceInstance();
+
             conn = dataSource.getConnection();
 
             PreparedStatement statement = conn.prepareStatement("INSERT INTO JOUEUR (NOM, PRENOM, SEXE) VALUES (?, ?, ?)");
             statement.setString(1, joueur.getNom());
             statement.setString(2, joueur.getPrenom());
-            statement.setString(3, joueur.getPrenom().toString());
+            statement.setString(3, joueur.getSexe().toString());
 
             statement.executeUpdate();
             System.out.println("Joueur créé.");
@@ -54,18 +52,14 @@ public class JoueurRepository {
     public void update(Joueur joueur) {
         Connection conn = null;
         try {
-            BasicDataSource dataSource = new BasicDataSource();
-            int nbPools = 5;
-            dataSource.setInitialSize(nbPools);
-            dataSource.setUrl("jdbc:mysql://localhost:3306/tennis?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Paris&allowPublicKeyRetrieval=true");
-            dataSource.setUsername("COURSDB");
-            dataSource.setPassword("coursdb");
+            DataSource dataSource = getSingleDataSourceInstance();
+
             conn = dataSource.getConnection();
 
             PreparedStatement statement = conn.prepareStatement("UPDATE JOUEUR SET NOM=?, PRENOM=?, SEXE=? WHERE ID=?");
             statement.setString(1, joueur.getNom());
             statement.setString(2, joueur.getPrenom());
-            statement.setString(3, joueur.getPrenom().toString());
+            statement.setString(3, joueur.getSexe().toString());
             statement.setLong(4, joueur.getId());
 
             statement.executeUpdate();
@@ -94,12 +88,8 @@ public class JoueurRepository {
     public void delete(Long id) {
         Connection conn = null;
         try {
-            BasicDataSource dataSource = new BasicDataSource();
-            int nbPools = 5;
-            dataSource.setInitialSize(nbPools);
-            dataSource.setUrl("jdbc:mysql://localhost:3306/tennis?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Paris&allowPublicKeyRetrieval=true");
-            dataSource.setUsername("COURSDB");
-            dataSource.setPassword("coursdb");
+            DataSource dataSource = getSingleDataSourceInstance();
+
             conn = dataSource.getConnection();
 
             PreparedStatement statement = conn.prepareStatement("DELETE FROM JOUEUR WHERE ID=?");
@@ -132,12 +122,8 @@ public class JoueurRepository {
         Connection conn = null;
         Joueur joueur = null;
         try {
-            BasicDataSource dataSource = new BasicDataSource();
-            int nbPools = 5;
-            dataSource.setInitialSize(nbPools);
-            dataSource.setUrl("jdbc:mysql://localhost:3306/tennis?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Paris&allowPublicKeyRetrieval=true");
-            dataSource.setUsername("COURSDB");
-            dataSource.setPassword("coursdb");
+            DataSource dataSource = getSingleDataSourceInstance();
+
             conn = dataSource.getConnection();
 
             PreparedStatement statement = conn.prepareStatement("SELECT NOM, PRENOM, SEXE FROM JOUEUR WHERE ID=?");
@@ -177,19 +163,14 @@ public class JoueurRepository {
         Connection conn = null;
         List<Joueur> joueurs = new ArrayList<Joueur>();
         try {
-            BasicDataSource dataSource = new BasicDataSource();
-            int nbPools = 5;
-            dataSource.setInitialSize(nbPools);
-            dataSource.setUrl("jdbc:mysql://localhost:3306/tennis?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Paris&allowPublicKeyRetrieval=true");
-            dataSource.setUsername("COURSDB");
-            dataSource.setPassword("coursdb");
+            DataSource dataSource = getSingleDataSourceInstance();
             conn = dataSource.getConnection();
 
             PreparedStatement statement = conn.prepareStatement("SELECT NOM, PRENOM, SEXE, ID FROM JOUEUR");
 
 
             ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 Joueur joueur = new Joueur();
                 joueur.setId(rs.getLong("ID"));
                 joueur.setNom(rs.getString("NOM"));
