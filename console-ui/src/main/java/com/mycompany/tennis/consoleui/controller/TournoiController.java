@@ -35,4 +35,11 @@ public class TournoiController {
         this.tournoiService.createTournoi(tournoi);
         System.out.println("Le tournoi a été créé avec l'id " + tournoi.getId());
     }
+
+    public void supprimeTournoi() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Entrez l'identifiant du tournoi que vous voulez supprimer");
+        Long id = scanner.nextLong();
+        this.tournoiService.supprimerTournoi(id);
+    }
 }
