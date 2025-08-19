@@ -6,7 +6,10 @@ import com.mycompany.tennis.core.entity.Joueur;
 
 public class UI {
     public static void main(String[] args) {
-        JoueurController joueurController = new JoueurController();
-        joueurController.afficheDetailsJoueur();
+//        JoueurController joueurController = new JoueurController();
+//        joueurController.afficheDetailsJoueur();
+
+        TournoiController tournoiController = new TournoiController();
+        tournoiController.afficheDetailsTournoi();
     }
 }
