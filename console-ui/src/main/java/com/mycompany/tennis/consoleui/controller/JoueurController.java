@@ -41,4 +41,17 @@ public class JoueurController {
         this.joueurServie.createJoueur(joueur);
         System.out.println("Le joueur a été créé avec l'id " + joueur.getId());
     }
+
+    public void rennomeJoueur() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Quel est l'identifiant du joueur dont vous voulez afficher les informations ?");
+        long identifiant = scanner.nextLong();
+        scanner.nextLine();
+
+        System.out.println("Quel est le nouveau nom que vous souhaitez lui attibuer ?");
+        String nouveauNom = scanner.nextLine();
+
+        this.joueurServie.renomme(identifiant, nouveauNom);
+    }
 }

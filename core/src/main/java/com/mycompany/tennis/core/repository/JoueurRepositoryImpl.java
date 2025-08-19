@@ -163,4 +163,28 @@ public class JoueurRepositoryImpl {
         }
         return joueurs;
     }
+
+    public void renomme(Long id, String nouveauNom) {
+        Session session = null;
+        Joueur joueur = null;
+        Transaction tx = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            joueur = session.get(Joueur.class, id);
+            joueur.setNom(nouveauNom);
+            tx.commit();
+            System.out.println("Nom du joueur modifié " + joueur.getNom());
+        } catch (Throwable t) {
+            t.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }
