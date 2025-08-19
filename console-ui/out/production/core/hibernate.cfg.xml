@@ -35,6 +35,7 @@
 		<!-- Enities to map -->
         <mapping class="com.mycompany.tennis.core.entity.Joueur" />
 		<mapping class="com.mycompany.tennis.core.entity.Tournoi" />
+        <mapping class="com.mycompany.tennis.core.entity.Epreuve" />
     </session-factory>
 
 </hibernate-configuration>
