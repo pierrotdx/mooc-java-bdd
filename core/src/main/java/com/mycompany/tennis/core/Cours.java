@@ -1,9 +1,10 @@
 package com.mycompany.tennis.core;
 
-import com.mycompany.tennis.core.entity.*;
-import com.mycompany.tennis.core.service.JoueurService;
+import com.mycompany.tennis.core.entity.Epreuve;
+import com.mycompany.tennis.core.entity.Joueur;
+import com.mycompany.tennis.core.entity.Match;
+import com.mycompany.tennis.core.entity.Score;
 import com.mycompany.tennis.core.service.MatchService;
-import com.mycompany.tennis.core.service.TournoiService;
 
 public class Cours {
     public static void main(String... args){

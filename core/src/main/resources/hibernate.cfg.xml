@@ -12,14 +12,14 @@
 
         <!-- dbcp connection pool configuration -->
         <property name="hibernate.dbcp.initialSize">5</property>
-        <!--property name="hibernate.dbcp.maxTotal">20</property>
-        <property name="hibernate.dbcp.maxIdle">10</property>
-        <property name="hibernate.dbcp.minIdle">5</property>
+        <!--property name="hibernate.dbcp.maxTotal">20</property-->
+        <!--property name="hibernate.dbcp.maxIdle">10</property-->
+        <!--property name="hibernate.dbcp.minIdle">5</property-->
 
-		<!-- Select our SQL dialect -->
+        <!-- Select our SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
 
-		<!-- Echo the SQL to stdout -->
+        <!-- Echo the SQL to stdout -->
         <property name="show_sql">true</property>
 
         <!-- Set the current session context -->
@@ -35,7 +35,6 @@
 		<!-- Enities to map -->
         <mapping class="com.mycompany.tennis.core.entity.Joueur" />
 		<mapping class="com.mycompany.tennis.core.entity.Tournoi" />
-
     </session-factory>
 
 </hibernate-configuration>

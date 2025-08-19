@@ -3,6 +3,7 @@ package com.mycompany.tennis.core.repository;
 import com.mycompany.tennis.core.HibernateUtil;
 import com.mycompany.tennis.core.entity.Joueur;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import static com.mycompany.tennis.core.DataSourceProvider.getSingleDataSourceInstance;
 
@@ -13,47 +14,26 @@ import java.util.List;
 
 public class JoueurRepositoryImpl {
 
-    public Long create(Joueur joueur) {
-        Connection conn = null;
+    public void create(Joueur joueur) {
+        Session session = null;
+        Transaction tx = null;
         try {
-            DataSource dataSource = getSingleDataSourceInstance();
-
-            conn = dataSource.getConnection();
-
-            PreparedStatement statement = conn.prepareStatement("INSERT INTO JOUEUR (NOM, PRENOM, SEXE) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, joueur.getNom());
-            statement.setString(2, joueur.getPrenom());
-            statement.setString(3, joueur.getSexe().toString());
-
-            statement.executeUpdate();
-
-            ResultSet rs = statement.getGeneratedKeys();
-
-            if (rs.next()) {
-                joueur.setId(rs.getLong(1));
-            }
-
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            session.persist(joueur);
+            tx.commit();
             System.out.println("Joueur créé.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            try {
-                if (conn != null) {
-                    conn.rollback();
-                }
-            } catch (SQLException e1) {
-                e1.printStackTrace();
+            if (tx != null)  {
+            tx.rollback();
             }
         }
         finally {
-            try {
-                if (conn!=null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (session != null) {
+                session.close();
             }
         }
-        return joueur.getId();
     }
 
     public void update(Joueur joueur) {

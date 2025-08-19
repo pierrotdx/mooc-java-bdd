@@ -1,7 +1,6 @@
 package com.mycompany.tennis.core.repository;
 
 import com.mycompany.tennis.core.HibernateUtil;
-import com.mycompany.tennis.core.entity.Joueur;
 import com.mycompany.tennis.core.entity.Tournoi;
 import org.hibernate.Session;
 

@@ -1,4 +1,4 @@
-package com.mycompany.tennis.controller;
+package com.mycompany.tennis.consoleui.controller;
 
 import com.mycompany.tennis.core.entity.Tournoi;
 import com.mycompany.tennis.core.service.TournoiService;
