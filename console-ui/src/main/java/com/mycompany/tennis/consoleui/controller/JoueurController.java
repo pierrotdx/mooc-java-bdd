@@ -54,4 +54,17 @@ public class JoueurController {
 
         this.joueurServie.renomme(identifiant, nouveauNom);
     }
+
+    public void changeDeSexe() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Quel est l'identifiant du joueur que vous voulez mettre à jour ?");
+        long identifiant = scanner.nextLong();
+        scanner.nextLine();
+
+        System.out.println("Quel est le nouveau sexe que vous voulez lui attribuer ?");
+        Character nouveauSexe = scanner.nextLine().charAt(0);
+
+        this.joueurServie.changerDeSexe(identifiant, nouveauSexe);
+    }
 }

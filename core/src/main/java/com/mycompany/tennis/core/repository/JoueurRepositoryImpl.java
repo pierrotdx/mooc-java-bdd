@@ -20,42 +20,6 @@ public class JoueurRepositoryImpl {
         System.out.println("Joueur créé.");
     }
 
-    public void update(Joueur joueur) {
-        Connection conn = null;
-        try {
-            DataSource dataSource = getSingleDataSourceInstance();
-
-            conn = dataSource.getConnection();
-
-            PreparedStatement statement = conn.prepareStatement("UPDATE JOUEUR SET NOM=?, PRENOM=?, SEXE=? WHERE ID=?");
-            statement.setString(1, joueur.getNom());
-            statement.setString(2, joueur.getPrenom());
-            statement.setString(3, joueur.getSexe().toString());
-            statement.setLong(4, joueur.getId());
-
-            statement.executeUpdate();
-            System.out.println("Joueur modifié.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            try {
-                if (conn != null) {
-                    conn.rollback();
-                }
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-        }
-        finally {
-            try {
-                if (conn!=null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public void delete(Long id) {
         Connection conn = null;
         try {
