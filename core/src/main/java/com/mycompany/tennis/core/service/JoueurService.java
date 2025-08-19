@@ -1,7 +1,10 @@
 package com.mycompany.tennis.core.service;
 
+import com.mycompany.tennis.core.HibernateUtil;
 import com.mycompany.tennis.core.entity.Joueur;
 import com.mycompany.tennis.core.repository.JoueurRepositoryImpl;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class JoueurService {
 
@@ -12,10 +15,67 @@ public class JoueurService {
     }
 
     public void createJoueur(Joueur joueur) {
-        this.joueurRepository.create(joueur);
+        Session session = null;
+        Transaction tx = null;
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            tx = session.beginTransaction();
+            this.joueurRepository.create(joueur);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
     }
 
-    public Joueur getJoueur(Long id) { return this.joueurRepository.getById(id); }
+    public Joueur getJoueur(Long id) {
+        Joueur joueur = null;
+        Session session = null;
+        Transaction tx = null;
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            tx = session.beginTransaction();
+            joueur = this.joueurRepository.getById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return joueur;
+    }
 
-    public void renomme(Long id, String nouveauNom) { this.joueurRepository.renomme(id, nouveauNom); }
+    public void renomme(Long id, String nouveauNom) {
+        Session session = null;
+        Transaction tx = null;
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            tx = session.beginTransaction();
+            Joueur joueur = this.joueurRepository.getById(id);
+            joueur.setNom(nouveauNom);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }

@@ -16,7 +16,7 @@
         <!--property name="hibernate.dbcp.maxIdle">10</property-->
         <!--property name="hibernate.dbcp.minIdle">5</property-->
 
-        <!-- Select our SQL dialect -->
+        <!-- Select our SQL dialect  -->
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
 
         <!-- Echo the SQL to stdout -->

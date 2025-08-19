@@ -15,25 +15,9 @@ import java.util.List;
 public class JoueurRepositoryImpl {
 
     public void create(Joueur joueur) {
-        Session session = null;
-        Transaction tx = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();
-            session.persist(joueur);
-            tx.commit();
-            System.out.println("Joueur créé.");
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (tx != null)  {
-            tx.rollback();
-            }
-        }
-        finally {
-            if (session != null) {
-                session.close();
-            }
-        }
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.persist(joueur);
+        System.out.println("Joueur créé.");
     }
 
     public void update(Joueur joueur) {
@@ -108,18 +92,9 @@ public class JoueurRepositoryImpl {
     public Joueur getById(Long id) {
         Session session = null;
         Joueur joueur = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            joueur = session.get(Joueur.class, id);
-            System.out.println("Joueur lu.");
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-        finally {
-            if (session != null) {
-                session.close();
-            }
-        }
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        joueur = session.get(Joueur.class, id);
+        System.out.println("Joueur lu.");
         return joueur;
     }
 
@@ -162,29 +137,5 @@ public class JoueurRepositoryImpl {
             }
         }
         return joueurs;
-    }
-
-    public void renomme(Long id, String nouveauNom) {
-        Session session = null;
-        Joueur joueur = null;
-        Transaction tx = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();
-            joueur = session.get(Joueur.class, id);
-            joueur.setNom(nouveauNom);
-            tx.commit();
-            System.out.println("Nom du joueur modifié " + joueur.getNom());
-        } catch (Throwable t) {
-            t.printStackTrace();
-            if (tx != null) {
-                tx.rollback();
-            }
-        }
-        finally {
-            if (session != null) {
-                session.close();
-            }
-        }
     }
 }
