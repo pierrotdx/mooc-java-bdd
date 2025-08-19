@@ -58,13 +58,15 @@ public class JoueurService {
     }
 
     public void renomme(Long id, String nouveauNom) {
+        Joueur joueur = this.getJoueur(id);
+
         Session session = null;
         Transaction tx = null;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             tx = session.beginTransaction();
-            Joueur joueur = this.joueurRepository.getById(id);
             joueur.setNom(nouveauNom);
+            session.merge(joueur);
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
