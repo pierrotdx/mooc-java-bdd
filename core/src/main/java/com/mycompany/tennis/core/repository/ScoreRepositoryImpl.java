@@ -1,6 +1,7 @@
 package com.mycompany.tennis.core.repository;
 
 import com.mycompany.tennis.core.HibernateUtil;
+import com.mycompany.tennis.core.entity.Match;
 import com.mycompany.tennis.core.entity.Score;
 import org.hibernate.Session;
 
@@ -72,5 +73,12 @@ public class ScoreRepositoryImpl {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Score score = session.get(Score.class, id);
         return score;
+    }
+
+    public void delete(Long id) {
+        Score score = this.getById(id);
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.delete(score);
+        System.out.println("Score supprimé.");
     }
 }

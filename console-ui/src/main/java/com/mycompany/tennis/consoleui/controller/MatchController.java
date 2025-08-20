@@ -109,4 +109,13 @@ public class MatchController {
 
         this.matchService.createMatch(matchDto);
     }
+
+    public void supprimerMatch() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Entre l'identifiant du match que vous voulez supprimer");
+        Long identifiant = scanner.nextLong();
+
+        this.matchService.deleteMatch(identifiant);
+    }
 }

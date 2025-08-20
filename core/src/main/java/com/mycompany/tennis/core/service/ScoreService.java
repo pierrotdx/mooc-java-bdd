@@ -84,4 +84,28 @@ public class ScoreService {
         }
         return scoreFullDto;
     }
+
+    public void deleteScore(Long id) {
+        Session session = null;
+        Transaction tx = null;
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            tx = session.beginTransaction();
+
+            this.scoreRepository.delete(id);
+
+            tx.commit();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }

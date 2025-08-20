@@ -43,4 +43,13 @@ public class ScoreController {
             System.out.println("Set 5: " + scoreFullDto.getSet5());
         }
     }
+
+    public void supprimerScore() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Entre l'identifiant du score que vous voulez supprimer");
+        Long identifiant = scanner.nextLong();
+
+        this.scoreService.deleteScore(identifiant);
+    }
 }

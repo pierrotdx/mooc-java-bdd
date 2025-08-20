@@ -2,6 +2,7 @@ package com.mycompany.tennis.core.repository;
 
 import com.mycompany.tennis.core.HibernateUtil;
 import com.mycompany.tennis.core.entity.Match;
+import com.mycompany.tennis.core.entity.Tournoi;
 import org.hibernate.Session;
 
 import java.sql.*;
@@ -17,5 +18,12 @@ public class MatchRepositoryImpl {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Match match = session.get(Match.class, id);
         return match;
+    }
+
+    public void delete(Long id) {
+        Match match = this.getById(id);
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.delete(match);
+        System.out.println("Match supprimé.");
     }
 }
