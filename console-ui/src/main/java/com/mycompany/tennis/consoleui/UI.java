@@ -1,9 +1,6 @@
 package com.mycompany.tennis.consoleui;
 
-import com.mycompany.tennis.consoleui.controller.EpreuveController;
-import com.mycompany.tennis.consoleui.controller.JoueurController;
-import com.mycompany.tennis.consoleui.controller.ScoreController;
-import com.mycompany.tennis.consoleui.controller.TournoiController;
+import com.mycompany.tennis.consoleui.controller.*;
 
 public class UI {
     public static void main(String[] args) {
@@ -16,7 +13,10 @@ public class UI {
 //        ScoreController scoreController = new ScoreController();
 //        scoreController.afficheDetailsScore();
 
-        EpreuveController epreuveController = new EpreuveController();
-        epreuveController.afficheRolandGarros();
+//        EpreuveController epreuveController = new EpreuveController();
+//        epreuveController.afficheRolandGarros();
+
+        MatchController matchController = new MatchController();
+        matchController.afficherDetailsMatch();
     }
 }
