@@ -46,4 +46,14 @@ public class MatchController {
         }
 
     }
+
+    public void tapisVert() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Quel est l'identifiant du match dont vous voulez effectuer le tapis vert ?");
+        Long identifiant = scanner.nextLong();
+
+        this.matchService.tapisVert(identifiant);
+
+    }
 }

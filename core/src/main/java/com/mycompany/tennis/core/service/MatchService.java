@@ -94,4 +94,37 @@ public class MatchService {
         }
         return matchDto;
     }
+
+    public void tapisVert(Long id) {
+        Session session = null;
+        Transaction tx = null;
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            tx = session.beginTransaction();
+
+            Match match = this.matchRepository.getById(id);
+            Joueur ancienVainqueur = match.getVainqueur();
+            match.setVainqueur(match.getFinaliste());
+            match.setFinaliste(ancienVainqueur);
+
+            match.getScore().setSet1((byte)0);
+            match.getScore().setSet2((byte)0);
+            match.getScore().setSet3((byte)0);
+            match.getScore().setSet4((byte)0);
+            match.getScore().setSet5((byte)0);
+
+            tx.commit();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }
