@@ -1,5 +1,6 @@
 package com.mycompany.tennis.consoleui;
 
+import com.mycompany.tennis.consoleui.controller.EpreuveController;
 import com.mycompany.tennis.consoleui.controller.JoueurController;
 import com.mycompany.tennis.consoleui.controller.ScoreController;
 import com.mycompany.tennis.consoleui.controller.TournoiController;
@@ -12,7 +13,10 @@ public class UI {
 //        TournoiController tournoiController = new TournoiController();
 //        tournoiController.supprimeTournoi();
 
-        ScoreController scoreController = new ScoreController();
-        scoreController.afficheDetailsScore();
+//        ScoreController scoreController = new ScoreController();
+//        scoreController.afficheDetailsScore();
+
+        EpreuveController epreuveController = new EpreuveController();
+        epreuveController.afficheDetailsEpreuve();
     }
 }
