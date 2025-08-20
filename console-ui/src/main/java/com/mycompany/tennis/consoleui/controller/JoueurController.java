@@ -1,8 +1,10 @@
 package com.mycompany.tennis.consoleui.controller;
 
+import com.mycompany.tennis.core.dto.JoueurDto;
 import com.mycompany.tennis.core.entity.Joueur;
 import com.mycompany.tennis.core.service.JoueurService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class JoueurController {
@@ -76,5 +78,12 @@ public class JoueurController {
         scanner.nextLine();
 
         this.joueurServie.deleteJoueur(identifiant);
+    }
+
+    public void afficheListeJoueurs() {
+        List<JoueurDto> joueursDto = this.joueurServie.getListeJoueurs();
+        for (JoueurDto joueurDto : joueursDto) {
+            System.out.println(joueurDto.getPrenom() + " " + joueurDto.getNom());
+        }
     }
 }
