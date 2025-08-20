@@ -11,7 +11,9 @@ import com.mycompany.tennis.core.repository.EpreuveRepositoryImpl;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class EpreuveService {
     private EpreuveRepositoryImpl epreuveRepository;
@@ -83,5 +85,44 @@ public class EpreuveService {
             }
         }
         return dto;
+    }
+
+    public List<EpreuveFullDto> getListeEpreuves(String codeTournoi) {
+        Session session = null;
+        Transaction tx = null;
+        List<EpreuveFullDto> epreuveFullDtos = new ArrayList<>();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            tx = session.beginTransaction();
+
+            List<Epreuve> epreuves = this.epreuveRepository.list(codeTournoi);
+
+            for (Epreuve epreuve : epreuves) {
+                final EpreuveFullDto epreuveFullDto = new EpreuveFullDto();
+                epreuveFullDto.setId(epreuve.getId());
+                epreuveFullDto.setId(epreuve.getId());
+                epreuveFullDto.setAnnee(epreuve.getAnnee());
+                epreuveFullDto.setTypeEpreuve(epreuve.getTypeEpreuve());
+                TournoiDto tournoiDto = new TournoiDto();
+                tournoiDto.setId(epreuve.getTournoi().getId());
+                tournoiDto.setCode(epreuve.getTournoi().getCode());
+                tournoiDto.setNom(epreuve.getTournoi().getNom());
+                epreuveFullDto.setTournoi(tournoiDto);
+                epreuveFullDtos.add(epreuveFullDto);
+            }
+
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return epreuveFullDtos;
     }
 }
