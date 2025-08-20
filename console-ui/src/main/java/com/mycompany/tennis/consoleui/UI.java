@@ -17,6 +17,6 @@ public class UI {
 //        scoreController.afficheDetailsScore();
 
         EpreuveController epreuveController = new EpreuveController();
-        epreuveController.afficheDetailsEpreuve();
+        epreuveController.afficheRolandGarros();
     }
 }
