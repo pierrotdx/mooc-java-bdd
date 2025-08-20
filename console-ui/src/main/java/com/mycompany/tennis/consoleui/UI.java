@@ -13,10 +13,10 @@ public class UI {
 //        ScoreController scoreController = new ScoreController();
 //        scoreController.afficheDetailsScore();
 
-        EpreuveController epreuveController = new EpreuveController();
-        epreuveController.afficheDetailsEpreuve();
+//        EpreuveController epreuveController = new EpreuveController();
+//        epreuveController.afficheDetailsEpreuve();
 
-//        MatchController matchController = new MatchController();
-//        matchController.afficherDetailsMatch();
+        MatchController matchController = new MatchController();
+        matchController.afficherDetailsMatch();
     }
 }

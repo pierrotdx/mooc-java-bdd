@@ -5,6 +5,7 @@ import com.mycompany.tennis.core.dto.*;
 import com.mycompany.tennis.core.entity.Epreuve;
 import com.mycompany.tennis.core.entity.Joueur;
 import com.mycompany.tennis.core.entity.Match;
+import com.mycompany.tennis.core.entity.Score;
 import com.mycompany.tennis.core.repository.MatchRepositoryImpl;
 import com.mycompany.tennis.core.repository.ScoreRepositoryImpl;
 import org.hibernate.Session;
@@ -65,6 +66,18 @@ public class MatchService {
             tournoiDto.setNom(epreuve.getTournoi().getNom());
             epreuveFullDto.setTournoi(tournoiDto);
             matchDto.setEpreuve(epreuveFullDto);
+
+            Score score = match.getScore();
+            ScoreFullDto scoreFullDto = new ScoreFullDto();
+            scoreFullDto.setId(score.getId());
+            scoreFullDto.setSet1(score.getSet1());
+            scoreFullDto.setSet2(score.getSet2());
+            scoreFullDto.setSet3(score.getSet3());
+            scoreFullDto.setSet4(score.getSet4());
+            scoreFullDto.setSet5(score.getSet5());
+
+            matchDto.setScore(scoreFullDto); // relation bi-directionnelle
+            scoreFullDto.setMatch(matchDto);
 
             tx.commit();
         }
