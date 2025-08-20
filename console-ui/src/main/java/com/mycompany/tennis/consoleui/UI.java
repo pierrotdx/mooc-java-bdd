@@ -10,11 +10,11 @@ public class UI {
 //        TournoiController tournoiController = new TournoiController();
 //        tournoiController.supprimeTournoi();
 
-        ScoreController scoreController = new ScoreController();
-        scoreController.afficheDetailsScore();
+//        ScoreController scoreController = new ScoreController();
+//        scoreController.afficheDetailsScore();
 
-//        EpreuveController epreuveController = new EpreuveController();
-//        epreuveController.afficheRolandGarros();
+        EpreuveController epreuveController = new EpreuveController();
+        epreuveController.afficheDetailsEpreuve();
 
 //        MatchController matchController = new MatchController();
 //        matchController.afficherDetailsMatch();
