@@ -1,6 +1,7 @@
 package com.mycompany.tennis.core.service;
 
 import com.mycompany.tennis.core.HibernateUtil;
+import com.mycompany.tennis.core.dto.TournoiDto;
 import com.mycompany.tennis.core.entity.Tournoi;
 import com.mycompany.tennis.core.repository.TournoiRepositoryImpl;
 import org.hibernate.Session;
@@ -13,11 +14,40 @@ public class TournoiService {
         this.tournoiRepository = new TournoiRepositoryImpl();
     }
 
-    public Tournoi getTournoi(Long id) {
-        return this.tournoiRepository.getById(id);
+    public TournoiDto getTournoiDto(Long id) {
+        Session session = null;
+        Transaction tx = null;
+        TournoiDto tournoiDto = null;
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            tx = session.beginTransaction();
+
+            Tournoi tournoi = this.tournoiRepository.getById(id);
+
+            tournoiDto = new TournoiDto();
+            tournoiDto.setId(tournoi.getId());
+            tournoiDto.setCode(tournoi.getCode());
+            tournoiDto.setNom(tournoi.getNom());
+
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return tournoiDto;
     }
 
-    public void createTournoi(Tournoi tournoi) {
+    public void createTournoi(TournoiDto tournoiDto) {
+        Tournoi tournoi = new Tournoi();
+        tournoi.setId(tournoiDto.getId());
+        tournoi.setCode(tournoiDto.getCode());
+        tournoi.setNom(tournoiDto.getNom());
         this.tournoiRepository.create(tournoi);
     }
 
