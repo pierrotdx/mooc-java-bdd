@@ -18,6 +18,5 @@ public class EpreuveController {
         System.out.println("Entrez l'identifiant de l'épreuve");
         Long id = scanner.nextLong();
         Epreuve epreuve = this.epreuveService.getEpreuve(id);
-        System.out.println("L'épreuve selectionnée se déroule en " + epreuve.getAnnee());
     }
 }

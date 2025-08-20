@@ -21,6 +21,7 @@ public class EpreuveService {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             tx = session.beginTransaction();
             epreuve = this.epreuveRepository.getById(id);
+            System.out.println("L'épreuve selectionnée se déroule en " + epreuve.getAnnee() + " et il s'agit du tournoi " + epreuve.getTournoi().getNom());
             tx.commit();
         } catch (Throwable t) {
             t.printStackTrace();
