@@ -1,7 +1,10 @@
 package com.mycompany.tennis.core.service;
 
 import com.mycompany.tennis.core.HibernateUtil;
+import com.mycompany.tennis.core.dto.*;
+import com.mycompany.tennis.core.entity.Epreuve;
 import com.mycompany.tennis.core.entity.Joueur;
+import com.mycompany.tennis.core.entity.Match;
 import com.mycompany.tennis.core.entity.Score;
 import com.mycompany.tennis.core.repository.ScoreRepositoryImpl;
 import org.hibernate.Session;
@@ -14,14 +17,60 @@ public class ScoreService {
         this.scoreRepository = new ScoreRepositoryImpl();
     }
 
-    public Score getScore(Long id) {
-        Score score = null;
+    public ScoreFullDto getScore(Long id) {
         Session session = null;
         Transaction tx = null;
+        ScoreFullDto scoreFullDto = null;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             tx = session.beginTransaction();
-            score = this.scoreRepository.getById(id);
+            Score score = this.scoreRepository.getById(id);
+
+            scoreFullDto = new ScoreFullDto();
+            scoreFullDto.setId(score.getId());
+            scoreFullDto.setSet1(score.getSet1());
+            scoreFullDto.setSet2(score.getSet2());
+            scoreFullDto.setSet3(score.getSet3());
+            scoreFullDto.setSet4(score.getSet4());
+            scoreFullDto.setSet5(score.getSet5());
+
+            Match match = score.getMatch();
+            MatchDto matchDto = new MatchDto();
+            matchDto.setId(match.getId());
+
+            Joueur finaliste = match.getFinaliste();
+            JoueurDto finalisteDto = new JoueurDto();
+            finalisteDto.setId(finaliste.getId());
+            finalisteDto.setNom(finaliste.getNom());
+            finalisteDto.setPrenom(finaliste.getPrenom());
+            finalisteDto.setSexe(finaliste.getSexe());
+            matchDto.setFinaliste(finalisteDto);
+
+            Joueur vainqueur = match.getVainqueur();
+            JoueurDto vainqueurDto = new JoueurDto();
+            vainqueurDto.setId(vainqueur.getId());
+            vainqueurDto.setNom(vainqueur.getNom());
+            vainqueurDto.setPrenom(vainqueur.getPrenom());
+            vainqueurDto.setSexe(vainqueur.getSexe());
+            matchDto.setVainqueur(vainqueurDto);
+
+            Epreuve epreuve = match.getEpreuve();
+            EpreuveFullDto epreuveFullDto = new EpreuveFullDto();
+            epreuveFullDto.setId(epreuve.getId());
+            epreuveFullDto.setAnnee(epreuve.getAnnee());
+            epreuveFullDto.setTypeEpreuve(epreuve.getTypeEpreuve());
+
+            TournoiDto tournoiDto = new TournoiDto();
+            tournoiDto.setId(epreuve.getTournoi().getId());
+            tournoiDto.setCode(epreuve.getTournoi().getCode());
+            tournoiDto.setNom(epreuve.getTournoi().getNom());
+            epreuveFullDto.setTournoi(tournoiDto);
+
+            matchDto.setEpreuve(epreuveFullDto);
+
+            scoreFullDto.setMatch(matchDto);
+
+            tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
             if (tx != null) {
@@ -33,6 +82,6 @@ public class ScoreService {
                 session.close();
             }
         }
-        return score;
+        return scoreFullDto;
     }
 }

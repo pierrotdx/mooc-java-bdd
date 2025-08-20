@@ -3,7 +3,6 @@ package com.mycompany.tennis.consoleui.controller;
 import com.mycompany.tennis.core.dto.JoueurDto;
 import com.mycompany.tennis.core.dto.MatchDto;
 import com.mycompany.tennis.core.service.MatchService;
-import org.jvnet.staxex.MtomEnabled;
 
 import java.util.Scanner;
 
@@ -17,7 +16,7 @@ public class MatchController {
     public void afficherDetailsMatch() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Entre l'identifiant du match dont vous voules les détails");
+        System.out.println("Entre l'identifiant du match dont vous voulez les détails");
         Long identifiant = scanner.nextLong();
 
         MatchDto matchDto = this.matchService.getMatch(identifiant);
