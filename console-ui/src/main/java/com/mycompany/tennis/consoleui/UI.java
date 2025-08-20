@@ -17,6 +17,6 @@ public class UI {
 //        epreuveController.afficheDetailsEpreuve();
 
         MatchController matchController = new MatchController();
-        matchController.tapisVert();
+        matchController.ajouterMatch();
     }
 }

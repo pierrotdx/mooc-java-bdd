@@ -6,6 +6,8 @@ import com.mycompany.tennis.core.entity.Epreuve;
 import com.mycompany.tennis.core.entity.Joueur;
 import com.mycompany.tennis.core.entity.Match;
 import com.mycompany.tennis.core.entity.Score;
+import com.mycompany.tennis.core.repository.EpreuveRepositoryImpl;
+import com.mycompany.tennis.core.repository.JoueurRepositoryImpl;
 import com.mycompany.tennis.core.repository.MatchRepositoryImpl;
 import com.mycompany.tennis.core.repository.ScoreRepositoryImpl;
 import org.hibernate.Session;
@@ -16,10 +18,14 @@ import javax.swing.*;
 public class MatchService {
     private ScoreRepositoryImpl scoreRepository;
     private MatchRepositoryImpl matchRepository;
+    private EpreuveRepositoryImpl epreuveRepository;
+    private JoueurRepositoryImpl joueurRepository;
 
     public MatchService() {
         this.scoreRepository = new ScoreRepositoryImpl();
         this.matchRepository = new MatchRepositoryImpl();
+        this.epreuveRepository = new EpreuveRepositoryImpl();
+        this.joueurRepository = new JoueurRepositoryImpl();
     }
 
     public void enregistrerNouveauMatch(Match match) {
@@ -112,6 +118,51 @@ public class MatchService {
             match.getScore().setSet3((byte)0);
             match.getScore().setSet4((byte)0);
             match.getScore().setSet5((byte)0);
+
+            tx.commit();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public void createMatch(MatchDto matchDto) {
+        Session session = null;
+        Transaction tx = null;
+        Match match = null;
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            tx = session.beginTransaction();
+
+            match = new Match();
+            Epreuve epreuve = this.epreuveRepository.getById(matchDto.getEpreuve().getId());
+            match.setEpreuve(epreuve);
+
+            Joueur vainqueur = this.joueurRepository.getById(matchDto.getVainqueur().getId());
+            match.setVainqueur(vainqueur);
+
+            Joueur finaliste = this.joueurRepository.getById(matchDto.getFinaliste().getId());
+            match.setFinaliste(finaliste);
+
+            Score score = new Score();
+            score.setMatch(match);
+            match.setScore(score);
+
+            score.setSet1(matchDto.getScore().getSet1());
+            score.setSet2(matchDto.getScore().getSet2());
+            score.setSet3(matchDto.getScore().getSet3());
+            score.setSet4(matchDto.getScore().getSet4());
+            score.setSet5(matchDto.getScore().getSet5());
+
+            matchRepository.create(match);
 
             tx.commit();
         }

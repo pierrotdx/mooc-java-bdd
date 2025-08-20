@@ -54,6 +54,59 @@ public class MatchController {
         Long identifiant = scanner.nextLong();
 
         this.matchService.tapisVert(identifiant);
+    }
 
+    public void ajouterMatch() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Quel est l'identifiant de l'épreuve du match à ajouter ?");
+        Long epreuveId = scanner.nextLong();
+        scanner.nextLine();
+        MatchDto matchDto = new MatchDto();
+        matchDto.setEpreuve(new EpreuveFullDto());
+        matchDto.getEpreuve().setId(epreuveId);
+
+        System.out.println("Quel est l'identifiant du vainqueur du match à ajouter ?");
+        Long vainqueurId = scanner.nextLong();
+        scanner.nextLine();
+        matchDto.setVainqueur(new JoueurDto());
+        matchDto.getVainqueur().setId(vainqueurId);
+
+        System.out.println("Quel est l'identifiant du finaliste du match à ajouter ?");
+        Long finalisteId = scanner.nextLong();
+        scanner.nextLine();
+        matchDto.setFinaliste(new JoueurDto());
+        matchDto.getFinaliste().setId(finalisteId);
+
+        System.out.println("Quelle est la valeur du set 1 ?");
+        Byte set1 = scanner.nextByte();
+        scanner.nextLine();
+        ScoreFullDto scoreFullDto = new ScoreFullDto();
+        scoreFullDto.setSet1(set1);
+
+        System.out.println("Quelle est la valeur du set 2 ?");
+        Byte set2 = scanner.nextByte();
+        scanner.nextLine();
+        scoreFullDto.setSet2(set2);
+
+        System.out.println("Quelle est la valeur du set 3 ?");
+        Byte set3 = scanner.nextByte();
+        scanner.nextLine();
+        scoreFullDto.setSet3(set3);
+
+        System.out.println("Quelle est la valeur du set 4 ?");
+        Byte set4 = scanner.nextByte();
+        scanner.nextLine();
+        scoreFullDto.setSet4(set4);
+
+        System.out.println("Quelle est la valeur du set 5 ?");
+        Byte set5 = scanner.nextByte();
+        scanner.nextLine();
+        scoreFullDto.setSet5(set5);
+
+        matchDto.setScore(scoreFullDto);
+        scoreFullDto.setMatch(matchDto);
+
+        this.matchService.createMatch(matchDto);
     }
 }
