@@ -4,11 +4,11 @@ import com.mycompany.tennis.consoleui.controller.*;
 
 public class UI {
     public static void main(String[] args) {
-//        JoueurController joueurController = new JoueurController();
-//        joueurController.afficheListeJoueurs();
+        JoueurController joueurController = new JoueurController();
+        joueurController.afficheListeJoueurs();
 
-        TournoiController tournoiController = new TournoiController();
-        tournoiController.supprimeTournoi();
+//        TournoiController tournoiController = new TournoiController();
+//        tournoiController.supprimeTournoi();
 
 //        ScoreController scoreController = new ScoreController();
 //        scoreController.supprimerScore();

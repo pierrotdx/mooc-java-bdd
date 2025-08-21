@@ -11,6 +11,8 @@ import com.mycompany.tennis.core.repository.EpreuveRepositoryImpl;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -88,12 +90,13 @@ public class EpreuveService {
     }
 
     public List<EpreuveFullDto> getListeEpreuves(String codeTournoi) {
-        Session session = null;
-        Transaction tx = null;
+        EntityManager em = null;
+        EntityTransaction tx = null;
         List<EpreuveFullDto> epreuveFullDtos = new ArrayList<>();
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
-            tx = session.beginTransaction();
+            em = HibernateUtil.getSessionFactory().getCurrentSession();
+            tx = em.getTransaction();
+            tx.begin();
 
             List<Epreuve> epreuves = this.epreuveRepository.list(codeTournoi);
 
@@ -119,8 +122,8 @@ public class EpreuveService {
             }
         }
         finally {
-            if (session != null) {
-                session.close();
+            if (em != null) {
+                em.close();
             }
         }
         return epreuveFullDtos;
