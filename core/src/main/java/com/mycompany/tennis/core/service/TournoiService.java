@@ -19,12 +19,10 @@ public class TournoiService {
     }
 
     public TournoiDto getTournoiDto(Long id) {
-        //Session session = null;
         EntityManager em = null;
         EntityTransaction tx = null;
         TournoiDto tournoiDto = null;
         try {
-            //session = HibernateUtil.getSessionFactory().getCurrentSession();
             em = EntityManagerHolder.getCurrentEntityManager();
             tx = em.getTransaction();
             tx.begin();

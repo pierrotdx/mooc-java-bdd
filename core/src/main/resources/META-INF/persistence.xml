@@ -14,7 +14,7 @@
         <properties>
             <!-- Configuring JDBC properties -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tennis?useSSL=false" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tennis?useSSL=false&amp;allowPublicKeyRetrieval=true" />
             <property name="javax.persistence.jdbc.user" value="COURSDB" />
             <property name="javax.persistence.jdbc.password" value="coursdb" />
 

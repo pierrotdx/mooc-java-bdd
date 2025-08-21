@@ -1,10 +1,12 @@
 package com.mycompany.tennis.core.repository;
 
+import com.mycompany.tennis.core.EntityManagerHolder;
 import com.mycompany.tennis.core.HibernateUtil;
 import com.mycompany.tennis.core.entity.Tournoi;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import javax.swing.text.Highlighter;
 import java.sql.*;
@@ -78,17 +80,17 @@ public class TournoiRepositoryImpl {
     }
 
     public Tournoi getById(Long id) {
-        Session session = null;
+        EntityManager em = null;
         Tournoi tournoi = null;
         try {
+            em = EntityManagerHolder.getCurrentEntityManager();
+            tournoi = em.find(Tournoi.class, id);
             System.out.println("Tournoi lu.");
-            session = HibernateUtil.getSessionFactory().openSession();
-            tournoi = session.get(Tournoi.class, id);
         } catch (Throwable t) {
             t.printStackTrace();
         } finally {
-            if (session != null) {
-                session.close();
+            if (em != null) {
+                em.close();
             }
         }
         return tournoi;
