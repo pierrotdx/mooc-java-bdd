@@ -42,6 +42,7 @@
               <configuration>
                   <port>8080</port>
                   <path>/webui</path>
+                  <contextFile>{basedir}\src\main\webapp\META-INF\context.xml</contextFile>
               </configuration>
           </plugin>
       </plugins>
