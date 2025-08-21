@@ -34,7 +34,6 @@ public class TournoiController {
         tournoiDto.setCode(code);
 
         this.tournoiService.createTournoi(tournoiDto);
-        System.out.println("Le tournoi a été créé avec l'id " + tournoiDto.getId());
     }
 
     public void supprimeTournoi() {

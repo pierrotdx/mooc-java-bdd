@@ -17,25 +17,9 @@ import static com.mycompany.tennis.core.DataSourceProvider.getSingleDataSourceIn
 
 public class TournoiRepositoryImpl {
     public void create(Tournoi tournoi) {
-        Session session = null;
-        Transaction tx = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();
-            session.persist(tournoi);
-            tx.commit();
-            System.out.println("Tournoi créé.");
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (tx != null) {
-                tx.rollback();
-            }
-        }
-        finally {
-            if (session != null) {
-                session.close();
-            }
-        }
+        EntityManager em = EntityManagerHolder.getCurrentEntityManager();;
+        em.persist(tournoi);
+        System.out.println("Tournoi créé.");
     }
 
     public void update(Tournoi tournoi) {
@@ -74,9 +58,9 @@ public class TournoiRepositoryImpl {
     }
 
     public void delete(Long id) {
-        Tournoi tournoi = this.getById(id);
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.delete(tournoi);
+        EntityManager em = EntityManagerHolder.getCurrentEntityManager();
+        Tournoi tournoi = em.find(Tournoi.class, id);
+        em.remove(tournoi);
     }
 
     public Tournoi getById(Long id) {

@@ -8,7 +8,7 @@ public class UI {
 //        joueurController.afficheListeJoueurs();
 
         TournoiController tournoiController = new TournoiController();
-        tournoiController.afficheDetailsTournoi();
+        tournoiController.supprimeTournoi();
 
 //        ScoreController scoreController = new ScoreController();
 //        scoreController.supprimerScore();
